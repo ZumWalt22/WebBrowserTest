@@ -1,0 +1,21 @@
+﻿testサンプル,,テスト実施サンプル,,,,,,,,,,,
+URL,,,,,,,,,,,,,
+SQL,,SELECT * FROM HLC_MAIN,,,,,,,,,,,
+テストNo（エビデンス不要時「0を設定」）,,0,0,0,0,5,6,7,8,9,10,11,12
+テスト名称,,テスト１,テスト２,テスト３,テスト４,テスト５,テスト６,テスト７,テスト８,テスト９,テスト１０,テスト１１,テスト１２
+Submit,,threadTitle_22b7474e-df02-4d78-8698-cf15f84649a0,Button1,Button1,Button1,Button1,Button1,Button1,Button1,Button1,Button1,Button1,Button1
+ポストバック回数,,1,1,1,1,1,1,1,1,1,1,1,1
+Submit Type（0:Submit 1:Click）,,0,0,0,0,0,0,0,0,0,0,0,0
+TestCase,,,,,,,,,,,,,
+TextBox1,TextBox,1,2,3,4,1,2,3,4,1,2,3,4
+TextBox2,TextBox,0,1,2,3,0,1,2,3,0,1,2,3
+RadioButtonList1_0,RadioButton,1,1,1,1,,,,,,,,
+RadioButtonList1_1,RadioButton,,,,,1,1,1,1,,,,
+RadioButtonList1_2,RadioButton,,,,,,,,,1,1,1,1
+RadioButtonList1_3,RadioButton,,,,,,,,,,,,
+TextBox3,TextBox,1,2,3,4,1,2,3,4,1,2,3,4
+TextBox4,TextBox,0,1,2,3,0,1,2,3,0,1,2,3
+DropDownList2,DropDownList,1,1,1,1,2,2,2,2,3,3,3,3
+TestResoult,,,,,,,,,,,,,
+Label1,Label,1,3,5,7,1,1,1,1,0,2,6,12
+Label2,Label,1,3,5,7,1,1,1,1,0,2,6,12
