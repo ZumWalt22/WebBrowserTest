@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title>WebTest Example </title>
+	</head>
+	<body>
+
+		<form action="WebTestExampleResult1.html" method="post">
+			<h1>WebTest Example</h1>
+			<p>
+				テキスト入力 ： <input type="text" id="textID" size="40" maxlength="20">
+			</p>
+			<p>
+			テキスト入力（NAMEタグ）： <input type="text" name="textNAME" size="40" maxlength="20">
+			</p>			
+			<p>
+			パスワード入力 ： <input type="password" id="passID" size="10" maxlength="8">
+			</p>
+			<p>
+				ラジオボタン選択 ： 
+				<input type="radio" id="radioID1" name="radioNAME" value="0" checked="checked">RadioTest1
+				<input type="radio" id="radioID2" name="radioNAME" value="1">RadioTest2
+				<input type="radio" id="radioID3" name="radioNAME" value="2">RadioTest3
+			</p>
+			<p>
+				チェックボックス選択 ： 
+				<input type="checkbox" id="checkboxID1">checkboxTest1
+				<input type="checkbox" id="checkboxID2">checkboxTest2
+			</p>
+
+			<p>
+				ドロップダウン選択 ： 
+				<select id="dropDownID">
+					<option value="1">select1</option>
+					<option value="2">select2</option>
+					<option value="3">select3</option>
+					<option value="4">select4</option>
+				</select>
+			</p>
+
+			<table border="1" width="500" cellspacing="0" cellpadding="1" bordercolor="#333333">
+				<tr>
+					<th bgcolor="#AAAAEE" width="150">label</th>
+					<th bgcolor="#AAAAEE" width="150">text</th>
+					<th bgcolor="#AAAAEE" width="200">checkbox</th>
+				</tr>
+				<tr>
+					<td align="center">Line 1</td>				
+					<td align="center"><input type="text" id="textListID1"></td>
+					<td align="center"><input type="checkbox" id="checkboxListID1">checkbox1</td>
+				</tr>
+				<tr>
+					<td align="center">Line 2</td>				
+					<td align="center"><input type="text" id="textListID2"></td>
+					<td align="center"><input type="checkbox" id="checkboxListID2">checkbox2</td>
+				</tr>
+				<tr>
+					<td align="center">Line 3</td>				
+					<td align="center"><input type="text" id="textListID3"></td>
+					<td align="center"><input type="checkbox" id="checkboxListID3">checkbox3</td>
+				</tr>
+			</table>
+			
+			<p>
+				<input type="button" id="buttonJs" value="画面遷移（Javascript）" onclick="window.open('WebTestExampleResult1.html', '_blank');">
+			</p>
+			<p>
+				<input type="submit" id="buttonSm" value="画面遷移（form）">
+			</p>
+		</form>			
+	</body>
+</html>
