@@ -152,8 +152,17 @@ namespace WindowsFormsApplication1
                                 case "RadioButton":
                                     webTestDictionaryList.Add(new FormElement(elementVal, "", FormElement.ElementType.RadioButton,inOutFlag, index));//ラジオボタン　チェック「1」チェック外す「0」
                                     break;
+                                case "CheckBox":
+                                    webTestDictionaryList.Add(new FormElement(elementVal, "", FormElement.ElementType.CheckBox, inOutFlag, index));//ラジオボタン　チェック「1」チェック外す「0」RadioButtonと動作は同じ
+                                    break;
                                 case "Label":
                                     webTestDictionaryList.Add(new FormElement(elementVal, "", FormElement.ElementType.Label, inOutFlag, index));
+                                    break;
+                                case "HiddenValue":
+                                    webTestDictionaryList.Add(new FormElement(elementVal, "", FormElement.ElementType.HiddenValue, inOutFlag, index));
+                                    break;
+                                default:
+                                    //TODO エラーログ出力
                                     break;
                             }
                         }

@@ -48,6 +48,7 @@ namespace WindowsFormsApplication1
                         switch (formElement.elementType)
                         {
                             case FormElement.ElementType.TextBox :
+                            case FormElement.ElementType.HiddenValue:
                                 //テキストボックス
                                 webBrowserReceiver.webBrowser.Document.GetElementById(formElement.id).InnerText = formElement.val.ToString();
                                 setLogInfoStr("Set Value TextBox", "Id", formElement.id, formElement.val.ToString());
@@ -63,6 +64,7 @@ namespace WindowsFormsApplication1
                                 //webBrowserReceiver.webBrowser.Document.All.GetElementsByName(formElement.id)[cntSub].SetAttribute("selectedindex", formElement.val);
                                 break;
                             case FormElement.ElementType.RadioButton:
+                            case FormElement.ElementType.CheckBox:
                                 //ラジオボタン
                                 webBrowserReceiver.webBrowser.Document.GetElementById(formElement.id).SetAttribute("CHECKED", formElement.val.ToString());
                                 setLogInfoStr("Set Value RadioButton", "Id", formElement.id, formElement.val.ToString());
@@ -70,7 +72,6 @@ namespace WindowsFormsApplication1
                             default:
                                 break;
                         }
-
                     }
                     else if ("1".Equals(VALUE_SET_MODE))
                     {

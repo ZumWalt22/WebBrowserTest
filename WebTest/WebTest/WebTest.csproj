@@ -149,6 +149,8 @@
     <None Include="TestCase\TestCase1.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="TestCase\TestCase2.csv" />
+    <None Include="TestCase\TestCase3.csv" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -202,6 +204,12 @@
     <Content Include="Ebidence\dm.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ExampleHTML\WebTestExample1.html" />
+    <Content Include="ExampleHTML\WebTestExample2.html" />
+    <Content Include="ExampleHTML\WebTestExample3.html" />
+    <Content Include="ExampleHTML\WebTestExampleResult1.html" />
+    <Content Include="ExampleHTML\WebTestExampleResult2.html" />
+    <Content Include="ExampleHTML\WebTestExampleResult3.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

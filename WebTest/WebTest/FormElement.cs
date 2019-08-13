@@ -10,7 +10,7 @@ namespace WindowsFormsApplication1
     /// </summary>
     public class FormElement
     {
-        public enum ElementType { TextBox, DropDownList, RadioButton,Label};
+        public enum ElementType { TextBox, DropDownList, RadioButton, CheckBox, Label, HiddenValue};
 
         public ElementType elementType;
         
