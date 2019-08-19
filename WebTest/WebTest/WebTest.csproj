@@ -171,6 +171,7 @@
     </None>
     <None Include="TestCase\TestCase2.csv" />
     <None Include="TestCase\TestCase3.csv" />
+    <None Include="TestCase\TestCaseTemplate.xlsx" />
     <None Include="WebTest_TemporaryKey.pfx" />
     <None Include="TestCase\WebTest操作手順.pdf" />
   </ItemGroup>
