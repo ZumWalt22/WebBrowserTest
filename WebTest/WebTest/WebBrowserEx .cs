@@ -9,7 +9,6 @@ using System.Security.Permissions;
 
 
 //WebBrowserコントロールにNewWindow2イベントを実装する
-//http://main.tinyjoker.net/Tech/CSharp/WebBrowser%A5%B3%A5%F3%A5%C8%A5%ED%A1%BC%A5%EB%A4%CBNewWindow2%A5%A4%A5%D9%A5%F3%A5%C8%A4%F2%BC%C2%C1%F5%A4%B9%A4%EB.html
 
 public class WebBrowserEx : WebBrowser{
 

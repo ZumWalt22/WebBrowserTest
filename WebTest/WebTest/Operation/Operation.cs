@@ -40,7 +40,7 @@ namespace WindowsFormsApplication1
        /// <summary>
        /// コンストラクタ
        /// </summary>
-      /// <param name="webBrowserReceiver">コントロールクラスのインスタンス</param>
+       /// <param name="webBrowserReceiver">コントロールクラスのインスタンス</param>
        public Operation(WebBrowserReceiver webBrowserReceiver,bool moveWaitFlag)
        {
            this.webBrowserReceiver = webBrowserReceiver;

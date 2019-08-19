@@ -30,7 +30,7 @@ namespace WindowsFormsApplication1
         /// テスト情報
         /// </summary>
         List<WebTestDto> webTestList = null;
-
+    
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -78,10 +78,14 @@ namespace WindowsFormsApplication1
             string buttonName = "";
 
             // PostBack回数
+            string postBackCntStr = "";
             int postBackCnt = 0;
 
             //Submit Type
+            string submitTypeStr = "";
             int submitType = 0;
+
+            bool isNumber = false;
 
             Dictionary<string, int> idDictionary = new Dictionary<string, int>();
 
@@ -105,6 +109,9 @@ namespace WindowsFormsApplication1
             //シートリスト情報を取得
             List<String> sheetList = excelController.getSheetList();
 
+            //エラーメッセージ文字列
+            string errorMsgStr = "";
+
             try
             {
                 //シートごとループ
@@ -113,34 +120,40 @@ namespace WindowsFormsApplication1
                     string captureSQL = "";
 
                     // URL取得
-                    url = excelController.getValue(sheetName, 3, 2);
+                    url = excelController.getValue(sheetName, CommonConst.CSV_URL_COL, CommonConst.CSV_URL_ROW);
+                    errorMsgStr += checkAndSetCsvErrorMsgStrValNotSet(url,"テスト対象URL", sheetName, CommonConst.CSV_URL_COL, CommonConst.CSV_URL_ROW);
 
                     // DBエビデンス取得SQL
                     captureSQL = excelController.getValue(sheetName, 3, 3);
 
                     //設定カラム名称を取得
                     List<string> colNameList = new List<string>();
-                    int colSetStart = 10;
-                    int colEbidenceStart = 10;
-                    int col = 10;
+                    int rowSetStart = 10;
+                    int rowEbidenceStart = 10;
+                    int row = 10;
                     int inOutFlag = 0; // IN
                     int index = 0;
 
                     //設定カラム名称を取得、マスタ情報を作成
                     webTestDictionaryList = new List<FormElement>();
-                    for (col = colSetStart; !string.IsNullOrWhiteSpace(excelController.getValue(sheetName, 1, col)); col++)
+                    for (row = rowSetStart; !string.IsNullOrWhiteSpace(excelController.getValue(sheetName, 1, row)); row++)
                     {
-                        string elementVal = excelController.getValue(sheetName, 1, col);
-                        string elementType = excelController.getValue(sheetName, 2, col);
+                        string elementVal = excelController.getValue(sheetName, CommonConst.TESTCASE_ELEMENT_VAL_COL, row);
+                        string elementType = excelController.getValue(sheetName, CommonConst.TESTCASE_ELEMENT_TYPE_COL, row);
+
+                        errorMsgStr += checkAndSetCsvErrorMsgStrValNotSet(elementVal, "項目値", sheetName, CommonConst.TESTCASE_ELEMENT_VAL_COL, row);
+                        errorMsgStr += checkAndSetCsvErrorMsgStrValNotSet(elementType, "項目種別", sheetName, CommonConst.TESTCASE_ELEMENT_TYPE_COL, row);
+
 
                         //設定情報開始位置
                         if ("TestResoult".Equals(elementVal))
                         {
-                            colEbidenceStart = col;
+                            rowEbidenceStart = row;
                             inOutFlag = 1; //OUT
                         }
                         else
                         {
+
                             switch (elementType)
                             {
                                 case "TextBox":
@@ -162,42 +175,61 @@ namespace WindowsFormsApplication1
                                     webTestDictionaryList.Add(new FormElement(elementVal, "", FormElement.ElementType.HiddenValue, inOutFlag, index));
                                     break;
                                 default:
-                                    //TODO エラーログ出力
+                                    errorMsgStr += setCsvErrorMsgStr("指定外の項目タイプです", sheetName, CommonConst.TESTCASE_ELEMENT_TYPE_COL,row);
                                     break;
                             }
                         }
 
-                        colNameList.Add(excelController.getValue(sheetName, 1, col));
+                        colNameList.Add(excelController.getValue(sheetName, 1, row));
                     }
 
                     // 設定値情報を取得(テスト番号が設定されている行を実行)
                     idDictionary.Clear();
-                    for (int cnt = 3; !string.IsNullOrWhiteSpace(excelController.getValue(sheetName, cnt, 4)); cnt++)
+                    for (int col = 3; !string.IsNullOrWhiteSpace(excelController.getValue(sheetName, col, 4)); col++)
                     {
+                        int valNum = -1;
+
                         // テストNO取得
-                        no = excelController.getValue(sheetName,cnt, 4);
+                        no = excelController.getValue(sheetName,col, CommonConst.TESTCASE_TEST_NO_ROW);
+                        errorMsgStr += checkAndSetCsvErrorMsgStrValNotSet(no, "テストNO", sheetName, col, CommonConst.TESTCASE_TEST_NO_ROW);
 
                         // テスト名称取得
-                        testName = excelController.getValue(sheetName, cnt, 5);
+                        testName = excelController.getValue(sheetName, col, CommonConst.TESTCASE_TEST_NAME_ROW);
+                        errorMsgStr += checkAndSetCsvErrorMsgStrValNotSet(no, "テスト名称", sheetName, col, CommonConst.TESTCASE_TEST_NAME_ROW);
 
                         // SubmitボタンID取得
-                        buttonName = excelController.getValue(sheetName, cnt, 6);
+                        buttonName = excelController.getValue(sheetName, col, CommonConst.TESTCASE_SUBMIT_BUTTON_ID_ROW);
+                        errorMsgStr += checkAndSetCsvErrorMsgStrValNotSet(no, "SubmitボタンID", sheetName, col, CommonConst.TESTCASE_SUBMIT_BUTTON_ID_ROW);
 
                         //ポストバック回数を取得
-                        postBackCnt = int.Parse(excelController.getValue(sheetName, cnt, 7));
+                        postBackCntStr = excelController.getValue(sheetName, col, CommonConst.TESTCASE_POSTBACK_COUNT_ROW);
+                        errorMsgStr += checkAndSetCsvErrorMsgStrValNotSet(postBackCntStr, "ポストバック回数", sheetName, col, CommonConst.TESTCASE_POSTBACK_COUNT_ROW);
+                        //valueが数値かを確認
+                        isNumber = int.TryParse(postBackCntStr, out postBackCnt);
+                        if (!isNumber || postBackCnt < 0)
+                        {
+                            errorMsgStr += setCsvErrorMsgStr("ポストバック回数は、０または正の値で指定してください", sheetName, CommonConst.TESTCASE_POSTBACK_COUNT_ROW, row);
+                        }
 
                         //Submitタイプを取得
-                        submitType = int.Parse(excelController.getValue(sheetName, cnt, 8));
+                        submitTypeStr = excelController.getValue(sheetName, col, CommonConst.TESTCASE_SUBMIT_TYPE_ROW);
+                        errorMsgStr += checkAndSetCsvErrorMsgStrValNotSet(no, "押下ボタン種別", sheetName, col, CommonConst.TESTCASE_SUBMIT_TYPE_ROW);
+                        //valueが数値かを確認
+                        isNumber = int.TryParse(submitTypeStr, out submitType);
+                        if (!isNumber || submitType < 0 || submitType > 1)
+                        {
+                            errorMsgStr += setCsvErrorMsgStr("押下ボタン種別は、Submit「1」、click「0」いずれかで指定してください", sheetName, CommonConst.TESTCASE_SUBMIT_TYPE_ROW, row);
+                        }
 
                         // 設定項目情報取得
-                        int cntSub = colSetStart;
+                        int rowSub = rowSetStart;
                         webTestDictionaryListSet = new List<FormElement>();
                         idDictionary.Clear();
                         foreach (FormElement formElement in webTestDictionaryList)
                         {
                             //エビデンス取得開始行のマーカー行はスキップする
-                            if (colEbidenceStart.Equals(cntSub)){
-                                cntSub ++;
+                            if (rowEbidenceStart.Equals(rowSub)){
+                                rowSub ++;
                             }
 
                             //Index の値を設定する
@@ -208,9 +240,45 @@ namespace WindowsFormsApplication1
                                 idDictionary.Remove(formElement.id);
                             }
 
+                            //テスト値取得
+                            string valStr = excelController.getValue(sheetName, col, rowSub);
+
+                            //テスト値妥当性確認
+                            isNumber = int.TryParse(valStr, out valNum);
+                            switch (formElement.elementType)
+                            {
+                                case FormElement.ElementType.TextBox:
+                                    break;
+                                case FormElement.ElementType.DropDownList:
+                                    if (!isNumber)
+                                    {
+                                        errorMsgStr += setCsvErrorMsgStr("Index値を数字で指定してください", sheetName, CommonConst.TESTCASE_ELEMENT_VAL_COL, row);
+                                    }
+                                    break;
+                                case FormElement.ElementType.RadioButton:
+                                    if (!isNumber || valNum < 0 || valNum > 1)
+                                    {
+                                        errorMsgStr += setCsvErrorMsgStr("チェック有り「1」、チェック無し「0」いずれかで指定してください", sheetName, CommonConst.TESTCASE_ELEMENT_VAL_COL, row);
+                                    }
+                                    break;
+                                case FormElement.ElementType.CheckBox:
+                                    if (!isNumber || valNum < 0 || valNum > 1)
+                                    {
+                                        errorMsgStr += setCsvErrorMsgStr("チェック有り「1」、チェック無し「0」いずれかで指定してください", sheetName, CommonConst.TESTCASE_ELEMENT_VAL_COL, row);
+                                    }
+                                    break;
+                                case FormElement.ElementType.Label:
+                                    break;
+                                case FormElement.ElementType.HiddenValue:
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            //テストNoごとの情報を追加
                             webTestDictionaryListSet.Add(new FormElement(
                                 formElement.id,
-                                excelController.getValue(sheetName, cnt, cntSub), 
+                                valStr, 
                                 formElement.elementType,
                                 formElement.inOutFlag,
                                 index)
@@ -220,7 +288,7 @@ namespace WindowsFormsApplication1
                             index++;
                             idDictionary.Add(formElement.id, index);
 
-                            cntSub ++;
+                            rowSub ++;
                         }
 
                         // テストデータをコマンドクラスに設定
@@ -249,8 +317,47 @@ namespace WindowsFormsApplication1
                 excelController.closeExcelFile();
             }
 
+            if(!string.IsNullOrEmpty(errorMsgStr))
+            {
+                formLog.setLogStrList(errorMsgStr);
+            }
+
             //作成情報を返す(グローバルにも情報を保管)
             return webTestList;
+        }
+
+        /// <summary>
+        /// testCase取得時エラーメッセージを組み立て
+        /// </summary>
+        /// <param name="errorMsgStr"></param>
+        /// <param name="sheetName"></param>
+        /// <param name="col"></param>
+        /// <param name="row"></param>
+        /// <returns></returns>
+        public string setCsvErrorMsgStr(string errorMsgStr,string sheetName,int col,int row)
+        {
+            string str = string.Format("SheetName : {0} Col : {1} Row : {2} Message : {3} \r\n", sheetName, col,row, errorMsgStr);
+
+            return str;
+        }
+
+        /// <summary>
+        /// testCase取得時エラーメッセージを組み立て　値が未設定
+        /// </summary>
+        /// <param name="errorMsgStr"></param>
+        /// <param name="sheetName"></param>
+        /// <param name="col"></param>
+        /// <param name="row"></param>
+        /// <returns></returns>
+        public string checkAndSetCsvErrorMsgStrValNotSet(string val, string elementName, string sheetName, int col, int row)
+        {
+            if (String.IsNullOrEmpty(val))
+            {
+                return string.Format("SheetName : {0} Col : {1} Row : {2} Message : {3} が設定されていません) \r\n", sheetName, col, row, elementName);
+
+            }
+
+            return "";
         }
 
         /// <summary>
@@ -260,11 +367,9 @@ namespace WindowsFormsApplication1
         /// <param name="auctionBidNo">一覧で選択されたテスト</param>
         public void testDone(List<int> testNoList)
         {
-            //個別実行史時、ウインドウが設定されていない場合チェック
+            //個別実行時、ウインドウが設定されていない場合チェック
             if (webBrowser == null)
             {
-                //TODO Webウインドウがないエラーを表示
-
                 return;
             }
 
@@ -296,6 +401,7 @@ namespace WindowsFormsApplication1
                 return;
             }
 
+            //個別実行時、ウインドウが設定されていない場合チェック
             if (webBrowser == null)
             {
                 return;

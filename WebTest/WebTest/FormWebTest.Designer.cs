@@ -43,10 +43,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.comboBoxUrl = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.tabControl1 = new TabControlEx();
             this.labelTestCaseExcelFile = new System.Windows.Forms.Label();
             this.buttonTestCaseSet = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tabControl1 = new TabControlEx();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -117,12 +117,12 @@
             // buttonLog
             // 
             this.buttonLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLog.Location = new System.Drawing.Point(887, 11);
+            this.buttonLog.Location = new System.Drawing.Point(890, 11);
             this.buttonLog.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonLog.Name = "buttonLog";
             this.buttonLog.Size = new System.Drawing.Size(103, 28);
             this.buttonLog.TabIndex = 22;
-            this.buttonLog.Text = "Log";
+            this.buttonLog.Text = "実行ログ";
             this.buttonLog.UseVisualStyleBackColor = true;
             this.buttonLog.Click += new System.EventHandler(this.buttonLog_Click);
             // 
@@ -174,7 +174,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(93, 51);
+            this.button5.Location = new System.Drawing.Point(102, 51);
             this.button5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(95, 28);
@@ -209,7 +209,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(480, 51);
+            this.button2.Location = new System.Drawing.Point(483, 51);
             this.button2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(95, 28);
@@ -218,24 +218,11 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Location = new System.Drawing.Point(214, 146);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(786, 437);
-            this.tabControl1.TabIndex = 1;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-            // 
             // labelTestCaseExcelFile
             // 
             this.labelTestCaseExcelFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTestCaseExcelFile.Location = new System.Drawing.Point(212, 17);
+            this.labelTestCaseExcelFile.Location = new System.Drawing.Point(216, 17);
             this.labelTestCaseExcelFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTestCaseExcelFile.Name = "labelTestCaseExcelFile";
             this.labelTestCaseExcelFile.Size = new System.Drawing.Size(550, 22);
@@ -269,6 +256,19 @@
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "手動実行";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Location = new System.Drawing.Point(214, 146);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(786, 437);
+            this.tabControl1.TabIndex = 1;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // FormWebTest
             // 

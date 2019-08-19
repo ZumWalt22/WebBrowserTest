@@ -202,6 +202,14 @@ namespace WindowsFormsApplication1
         /// <param name="e"></param>
         private void buttonTestAllDo_Click(object sender, EventArgs e)
         {
+            //TestCase選択されているかを確認
+            if (checkedListBox1.CheckedIndices.Count == 0)
+            {
+                MessageBox.Show("対象のテストケースが選択されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
             //ポストバックカウントをリセット
             documentCompletedCount = 0;
 
@@ -261,6 +269,12 @@ namespace WindowsFormsApplication1
         /// <param name="e"></param>
         private void buttonUrlSet_Click(object sender, EventArgs e)
         {
+            //一覧選択チェック
+            if (!checkTestCaseListSelected())
+            {
+                return;
+            }
+
             ////URLを設定
             //comboBoxUrl.Text = webTestController.getWebTestInfo(checkedListBox1.SelectedIndex).url;
 
@@ -297,6 +311,12 @@ namespace WindowsFormsApplication1
         /// <param name="e"></param>
         private void button5_Click(object sender, EventArgs e)
         {
+            //一覧選択チェック
+            if (!checkTestCaseListSelected() || !checkWebWindowOpened())
+            {
+                return;
+            }
+
             //マニュアル実行
             webTestController.testDoneManual(checkedListBox1.SelectedIndex,1);
         }
@@ -308,6 +328,12 @@ namespace WindowsFormsApplication1
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
+            //一覧選択チェック
+            if (!checkTestCaseListSelected() || !checkWebWindowOpened())
+            {
+                return;
+            }
+
             //マニュアル実行
             webTestController.testDoneManual(checkedListBox1.SelectedIndex, 2);
         }
@@ -319,6 +345,12 @@ namespace WindowsFormsApplication1
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
+            //一覧選択チェック
+            if (!checkTestCaseListSelected() || !checkWebWindowOpened())
+            {
+                return;
+            }
+
             //マニュアル実行
             webTestController.testDoneManual(checkedListBox1.SelectedIndex, 3);
         }
@@ -336,6 +368,37 @@ namespace WindowsFormsApplication1
         //    //webBrowserEx1.Document.InvokeScript("funcWithoutPram");
         //}
 
+        /// <summary>
+        /// テストケースリスト選択確認
+        /// </summary>
+        /// <returns></returns>
+        public bool checkTestCaseListSelected()
+        {
+            //一覧選択チェック
+            if (checkedListBox1.SelectedIndex == -1)
+            {
+                MessageBox.Show("対象のテストケースが選択されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Web画面設定確認
+        /// </summary>
+        /// <returns></returns>
+        public bool checkWebWindowOpened()
+        {
+            //一覧選択チェック
+            if (webTestController.webBrowser == null)
+            {
+                MessageBox.Show("テスト対象のWeb画面が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
         #endregion
 
         #region 処理サブルーチン

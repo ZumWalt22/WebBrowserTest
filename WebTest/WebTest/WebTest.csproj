@@ -93,6 +93,7 @@
     <Compile Include="AdoDbMng.cs" />
     <Compile Include="CommandType\CommandType.cs" />
     <Compile Include="CommandType\WebTestDo.cs" />
+    <Compile Include="CommonConst.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="ExcelOutput.cs" />
     <Compile Include="FormLog.cs">
@@ -171,9 +172,13 @@
     </None>
     <None Include="TestCase\TestCase2.csv" />
     <None Include="TestCase\TestCase3.csv" />
-    <None Include="TestCase\TestCaseTemplate.xlsx" />
+    <None Include="TestCase\TestCaseTemplate.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="WebTest_TemporaryKey.pfx" />
-    <None Include="TestCase\WebTest操作手順.pdf" />
+    <None Include="TestCase\WebTest操作手順.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
