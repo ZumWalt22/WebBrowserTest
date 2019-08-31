@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using ExcelMng;
+using System.IO;
 
 namespace WindowsFormsApplication1
 {   
@@ -33,6 +34,9 @@ namespace WindowsFormsApplication1
 
             //表示中のHtmlソースを取得する
             string htmlStr = webBrowserReceiver.webBrowser.DocumentText;
+            //MemoryStream reader = (MemoryStream)webBrowserReceiver.webBrowser.DocumentStream;
+            //byte[] bytes = reader.ToArray();
+            //string htmlStr = Encoding.GetEncoding("UTF-8").GetString(bytes);
 
             // カレントディレクトリを取得する
             string stCurrentDir = System.IO.Directory.GetCurrentDirectory();
@@ -42,7 +46,7 @@ namespace WindowsFormsApplication1
             System.IO.StreamWriter sw = new System.IO.StreamWriter(
                 @stCurrentDir + "\\" + "Ebidence" + "\\" + webTestDto.testNo + "_" + webTestDto.ebidenceSetMode + TMP_FILE_NAME,
                 false,
-                System.Text.Encoding.GetEncoding("shift_jis"));
+                System.Text.Encoding.GetEncoding("UTF-8")); //TODO Configファイルから設定できるように修正
             //TextBox1.Textの内容を書き込む
             sw.Write(htmlStr);
             //閉じる

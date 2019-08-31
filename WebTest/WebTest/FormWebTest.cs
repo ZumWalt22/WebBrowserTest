@@ -70,6 +70,9 @@ namespace WindowsFormsApplication1
 
             webTestController = new WebTestController(this, null, excelController, formLog);
 
+            //動作対象のIEバージョンを取得し表示
+            toolStripStatusLabel1.Text = "IE Version : " + new WebBrowser().Version.ToString();
+
             //------------テストケース
 
             //フルパスを作成
@@ -227,7 +230,7 @@ namespace WindowsFormsApplication1
             }
 
             //ウエイト
-            //System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(1000); //TODO Configで外から設定できるようにする
 
             //テスト自動実行
             webTestController.testDone(checkedListBox1.CheckedIndices.Cast<int>().ToList());
