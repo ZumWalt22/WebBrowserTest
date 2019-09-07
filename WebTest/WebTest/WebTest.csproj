@@ -8,8 +8,8 @@
     <ProjectGuid>{B5D89A04-84C4-416F-8FD1-DD9B3543E7E2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebTest</RootNamespace>
-    <AssemblyName>WebTest</AssemblyName>
+    <RootNamespace>WebBrowserTest</RootNamespace>
+    <AssemblyName>WebBrowserTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -70,6 +70,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>WindowsFormsApplication1.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>wbt.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -235,6 +241,7 @@
     <Content Include="ExampleHTML\WebTestExampleResult1.html" />
     <Content Include="ExampleHTML\WebTestExampleResult2.html" />
     <Content Include="ExampleHTML\WebTestExampleResult3.html" />
+    <Content Include="wbt.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

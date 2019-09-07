@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormWebTest));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.buttonAllSel = new System.Windows.Forms.Button();
@@ -56,10 +57,10 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 595);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 594);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 18, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1006, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(1006, 26);
             this.statusStrip1.TabIndex = 11;
             this.statusStrip1.Text = "-";
             // 
@@ -290,10 +291,11 @@
             this.Controls.Add(this.buttonTestAllDo);
             this.Controls.Add(this.comboBoxUrl);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MinimumSize = new System.Drawing.Size(1024, 667);
             this.Name = "FormWebTest";
-            this.Text = "WebTest";
+            this.Text = "WebBrowserTest";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormWebTest_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
